@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-test
+  labels:
+    app: sanic-k8s
+  
+spec:
+  containers:
+  - name: k8s-test
+    image: qing0928/k8s-test-server:latest
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-test-2
+  labels:
+    app: sanic-k8s
+  
+spec:
+  containers:
+  - name: k8s-test-2
+    image: qing0928/k8s-test-server:latest
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
