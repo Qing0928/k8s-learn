@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-test-ingress
+spec:
+  ingressClassName: nginx
+  rules: 
+    - host: giraffe.com
+      http: 
+        paths: 
+        - path: /hello-world
+          pathType: Prefix
+          backend: 
+            service: 
+              name: k8s-test-service
+              port: 
+                number: 8000
+    - host: qing.com
+      http:
+        paths:
+        - path: /hello-world
+          pathType: Prefix
+          backend: 
+            service: 
+              name: k8s-qing-service
+              port:
+                number: 8000
+  #defaultBackend: 
+    #service: 
+      #name: k8s-test-service
+      #port: 
+        #number: 8000

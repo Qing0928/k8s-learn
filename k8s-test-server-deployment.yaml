@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: giraffe-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sanic-k8s
+  template:
+    metadata:
+      labels:
+        app: sanic-k8s
+    spec:
+      containers:
+      - name: giraffe
+        image: qing0928/k8s-test-server:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qing-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sanic-k8s-qing
+  template:
+    metadata:
+      labels:
+        app: sanic-k8s-qing
+    spec:
+      containers:
+      - name: qing
+        image: qing0928/k8s-test-server:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
